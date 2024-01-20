@@ -1,0 +1,51 @@
+* {
+  margin:0;
+  padding:0;
+}
+body {
+  background:#181818;
+  color:#fff;
+}
+header {
+  display : flex;
+  justify-content:space-between;
+  background-color:#000000 ;
+  border-bottom: 2px solid #2c2c2c;
+  padding:20px 50px;
+}
+header a {
+  margin-left: 20px;
+}
+a {
+  text-decoration: none;
+  color:#cb2222;
+}
+a:hover {
+  text-decoration: underline;
+}
+.container{
+  padding:50px;
+}
+.post {
+  width:500px;
+  margin-top:50px;
+  padding:20px;
+  border-radius:5px;
+  background:#598191;
+  color:#000;
+}
+.post h2{
+  margin-bottom: 20px;
+}
+.post p{
+  margin-bottom:10px;
+}
+.post a {
+  color: #283c44;
+}
+.testForm{
+  width: 200px;
+  display: flex;
+  flex-direction:column;
+  gap:10px;
+}
