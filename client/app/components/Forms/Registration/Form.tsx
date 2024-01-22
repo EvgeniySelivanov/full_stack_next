@@ -16,8 +16,8 @@ interface IForm {
 
 export const RegistrationForm = () => {
   const [formData, setFormData] = useState<IForm>({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
   });
@@ -29,8 +29,8 @@ export const RegistrationForm = () => {
   const clearForm = () => {
     setFormData({
       ...formData,
-      firstName: '',
-      lastName: '',
+      first_name: '',
+      last_name: '',
       email: '',
       password: '',
     });
