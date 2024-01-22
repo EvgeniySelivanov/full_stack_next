@@ -49,3 +49,9 @@ a:hover {
   flex-direction:column;
   gap:10px;
 }
+
+.muiForm{
+  background: white;
+  color:black;
+  padding:10px;
+}

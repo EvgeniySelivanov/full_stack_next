@@ -1,13 +1,18 @@
 'use client';
 import React from 'react';
 import { useState } from 'react';
-import { handleSubmit } from '../api/req/writeToDb';
+import { handleSubmit } from './handleSubmit';
+import {  Input, Button, FormControl, Typography} from '@mui/material';
+
+
+
 
 const Form = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
+    password:''
   });
 
   const sendData = () => {
@@ -21,7 +26,55 @@ const Form = () => {
   };
   return (
     <div>
-      <form className="testForm">
+     
+        <form  onSubmit={sendData} style={{display:'flex',flexDirection:'column',gap:'20px'}} className="muiForm">
+        <Typography variant="h5" gutterBottom>
+          My Form
+        </Typography>
+        <FormControl>
+          <Input
+         type="text"
+         name="firstName"
+         placeholder="firstName"
+         value={formData.firstName}
+         onChange={handleChange}
+         color='primary'
+         variant='outlined'
+            fullWidth
+          />
+            <Input
+         type="text"
+         name="lastName"
+         placeholder="lastName"
+         value={formData.lastName}
+         onChange={handleChange}
+            fullWidth
+          />
+            <Input
+          type="email"
+          name="email"
+          placeholder="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <Input
+          type="password"
+          name="password"
+          placeholder="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+        </FormControl>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+        >
+          Submit
+        </Button>
+      
+    </form>
+      {/* <form className="testForm">
         <p>Users form</p>
         <input
           type="text"
@@ -44,8 +97,15 @@ const Form = () => {
           value={formData.email}
           onChange={handleChange}
         />
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
         <button onClick={sendData}>Go!</button>
-      </form>
+      </form> */}
     </div>
   );
 };
