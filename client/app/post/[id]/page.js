@@ -1,5 +1,6 @@
 
-import Post from '@/app/components/Post'; 
+import Post from '../../components/Post';
+
 
 
 async function fetchData(id) {

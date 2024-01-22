@@ -1,0 +1,25 @@
+.form{
+  width:20%;
+  display: flex;
+  flex-direction:column;
+  gap:15px;
+  background: rgb(250, 250, 250);
+  color:black;
+  padding:10px;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.buttonsGroup{
+  margin-top: 10px;
+  display: flex;
+  flex-direction:column;
+  width: 100%;
+  align-items: center;
+}
+.button{
+  margin-bottom: 10px;
+}
+.button:last-child{
+  margin-bottom: 0;
+}

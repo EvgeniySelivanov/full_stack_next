@@ -1,8 +1,6 @@
-
 import Link from 'next/link';
 import { AuthProvider } from './AuthContext';
-import Form from './components/Form';
-
+import Button from './components/UI/Button';
 async function fetchData() {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
   const result = await res.json();
@@ -10,13 +8,11 @@ async function fetchData() {
 }
 
 export default async function Home() {
-  
   const posts = await fetchData();
 
   return (
     <AuthProvider>
-      <div>
-        <Form />
+      <div className='container'>
        
         <h1>Main page </h1>
         {posts.map((el) => (

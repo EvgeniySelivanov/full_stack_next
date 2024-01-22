@@ -24,6 +24,9 @@ a:hover {
   text-decoration: underline;
 }
 .container{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
   padding:50px;
 }
 .post {
@@ -43,15 +46,5 @@ a:hover {
 .post a {
   color: #283c44;
 }
-.testForm{
-  width: 200px;
-  display: flex;
-  flex-direction:column;
-  gap:10px;
-}
 
-.muiForm{
-  background: white;
-  color:black;
-  padding:10px;
-}
+
