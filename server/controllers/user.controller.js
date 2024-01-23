@@ -2,14 +2,18 @@ const createError = require('http-errors');
 const _ = require('lodash');
 const { Op } = require('sequelize');
 const { User } = require('../models');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
-const checkBody = (body) => _.pick(body, ['firstName', 'lastName', 'email','password']);
+const checkBody = (body) =>
+  _.pick(body, ['first_name', 'last_name', 'email', 'password']);
 
 module.exports.createUser = async (req, res, next) => {
   try {
     const { body } = req;
-    const value = checkBody(body);
-    console.log(value);
+    const { password = '' } = body;
+    const hash = await bcrypt.hash(password, saltRounds);
+    const value = checkBody({ ...body, password: hash });
     const createdUser = await User.create(value);
     if (!createdUser) {
       return next(createError(400, 'Check your data'));

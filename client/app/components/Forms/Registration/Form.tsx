@@ -51,7 +51,7 @@ export const RegistrationForm = () => {
       <FormControl required fullWidth>
       <OutlinedInput
         type="text"
-        name="firstName"
+        name="first_name"
         placeholder="First Name"
         value={formData.firstName}
         onChange={handleChange}
@@ -61,7 +61,7 @@ export const RegistrationForm = () => {
       <FormControl required fullWidth>
         <OutlinedInput
           type="text"
-          name="lastName"
+          name="last_name"
           placeholder="Last Name"
           value={formData.lastName}
           onChange={handleChange}

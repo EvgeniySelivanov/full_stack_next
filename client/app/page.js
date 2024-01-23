@@ -14,8 +14,6 @@ async function fetchUser() {
 export default async function Home() {
   const posts = await fetchData();
   const {data} = await fetchUser();
-  console.log(posts);
-  console.log(data);
   return (
     <AuthProvider>
       <div className="container">

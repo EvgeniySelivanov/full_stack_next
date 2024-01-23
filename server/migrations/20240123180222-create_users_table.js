@@ -27,9 +27,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       password: {
-        field: 'password',
+        field: 'password_hash',
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       createdAt: {
         field: 'created_at',
