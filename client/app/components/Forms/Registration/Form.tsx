@@ -1,9 +1,8 @@
 'use client';
 import React, { useState } from 'react';
-import { handleSubmit } from './handleSubmit';
+import { registration } from './registration';
 import { FormControl, Typography, OutlinedInput } from '@mui/material';
 import { InputControl, Label } from '../UI/FormComponents/FormComponents.ts';
-// import OutlinedInput from '../UI/Input/OutlinedInput.tsx';
 import Button from '../../UI/Button/Button';
 import styles from './Form.module.css';
 
@@ -22,10 +21,11 @@ export const RegistrationForm = () => {
     password: '',
   });
 
-  const sendData = () => {
-    handleSubmit(formData);
+  const sendData = async () => {
+    result = await registration(formData);
     clearForm();
   };
+
   const clearForm = () => {
     setFormData({
       ...formData,
@@ -42,21 +42,20 @@ export const RegistrationForm = () => {
     });
   };
 
-
   return (
     <form onSubmit={sendData} className={styles.form}>
       <Typography variant="h5" gutterBottom>
-      Registration
+        Registration
       </Typography>
       <FormControl required fullWidth>
-      <OutlinedInput
-        type="text"
-        name="first_name"
-        placeholder="First Name"
-        value={formData.firstName}
-        onChange={handleChange}
-        fullWidth
-      />
+        <OutlinedInput
+          type="text"
+          name="first_name"
+          placeholder="First Name"
+          value={formData.firstName}
+          onChange={handleChange}
+          fullWidth
+        />
       </FormControl>
       <FormControl required fullWidth>
         <OutlinedInput

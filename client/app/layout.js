@@ -1,4 +1,5 @@
 import './globals.css';
+import { AuthProvider } from './AuthContext';
 import { StyledEngineProvider } from '@mui/material/styles';
 import { Inter } from 'next/font/google';
 import Header from './components/Header';
@@ -12,12 +13,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-      <StyledEngineProvider injectFirst>
-        <Header/>
-        <div className='container'>{children}</div>
-      </StyledEngineProvider>
-        
-        </body>
+        <AuthProvider>
+          <StyledEngineProvider injectFirst>
+            <Header />
+            <div className="container">{children}</div>
+          </StyledEngineProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

@@ -1,7 +1,6 @@
 'use server';
-export const handleSubmit=(formData)=>{
-  console.log(formData);
-  const fetchData = async () => {
+export const registration=async (formData)=>{
+
     try {
       const response = await fetch('http://localhost:5000/api/users',{
        method: 'POST',
@@ -21,7 +20,5 @@ export const handleSubmit=(formData)=>{
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  };
-
-  fetchData();
+ 
 }
