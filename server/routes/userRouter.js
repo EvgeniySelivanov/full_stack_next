@@ -8,8 +8,9 @@ const userRouter = Router();
 //users
 //http://localhost:3000/api
 userRouter.post('/', UserController.createUser);
+userRouter.post('/getByEmail',  UserController.getUserByEmail);
+userRouter.get('/:idUser',  UserController.getUser);
 userRouter.get('/',paginate, UserController.getAllUsers);
-userRouter.get('/:email',  UserController.getUser);
 userRouter.patch('/:idUser', checkUser, UserController.updateUser);
 userRouter.patch('/instance/:idUser', checkUser, UserController.updateUserInstance);
 userRouter.delete('/:idUser', checkUser, UserController.deleteUser);

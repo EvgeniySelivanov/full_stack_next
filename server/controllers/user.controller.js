@@ -104,14 +104,34 @@ module.exports.deleteUser = async (req, res, next) => {
 
 module.exports.getUser = async (req, res, next) => {
   try {
-    const {params: { email } } = req;
-    const user = await User.findByPk(email, {
+    const {params: { idUser } } = req;
+    const user = await User.findByPk(idUser, {
       attributes: { exclude: ['password'] },
     });
     if (!user) {
       const error = createError(404, 'User not found');
       return next(error);
     }
+    res.status(200).send({ data: user });
+  } catch (error) {
+    next(error);
+  }
+};
+module.exports.getUserByEmail = async (req, res, next) => {
+  console.log('getUserByEmail');
+  console.log('>>>>>>>>>>',req.body);
+
+  try {
+    const {body} = req;
+    const user = await User.findOne( {
+      where:{email:body.email},
+      attributes: { exclude: ['password'] },
+    });
+    if (!user) {
+      const error = createError(404, 'User not found');
+      return next(error);
+    }
+    console.log('>>>>>user>>>>>',user);
     res.status(200).send({ data: user });
   } catch (error) {
     next(error);

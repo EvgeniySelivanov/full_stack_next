@@ -1,4 +1,4 @@
-import type { AuthOptions,User } from 'next-auth';
+import type { AuthOptions, User } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
 
@@ -14,30 +14,38 @@ export const authConfig: AuthOptions = {
         password: { label: 'password', type: 'password', required: true },
       },
       async authorize(credentials) {
+        console.log('credentials', credentials);
+
         if (!credentials?.email || !credentials?.password) return null;
 
         const response = await fetch(
-          'http://localhost:5000/api/users/?email=${credentials.email}',
+          `http://localhost:5000/api/users/getByEmail`,
           {
-            method: 'GET',
+            method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
+            body: JSON.stringify({
+              email: credentials?.email,
+            }),
           }
         );
-        const {data} = await response?.json();
-        console.log('response>>>>>>>',data[0]);
-       const fullName=`${data[0].first_name}  ${data[0].last_name}`
-        if (data[0].email === credentials.email) {
-          const proof={
-            name:fullName,
-            email:data[0].email,
-            image:data[0]?.image
-          }
+        const { data } = await response?.json();
+        console.log('response>>>>>>>', data);
+        const fullName = `${data.first_name}  ${data.last_name}`;
+        if (data.email === credentials.email) {
+          const proof = {
+            name: fullName,
+            email: data.email,
+            image: data?.image,
+          };
           return proof as User;
         }
-        return null
+        return null;
       },
     }),
   ],
+  pages: {
+    signIn: '/signin',
+  },
 };

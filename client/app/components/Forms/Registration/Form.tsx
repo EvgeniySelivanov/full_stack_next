@@ -1,11 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useAuth } from '../../../AuthContext';
 import { registration } from './registration';
 import { FormControl, Typography, OutlinedInput } from '@mui/material';
 import { InputControl, Label } from '../UI/FormComponents/FormComponents.ts';
 import Button from '../../UI/Button/Button';
+import GoogleButton from '../../GoogleButton';
 import styles from './Form.module.css';
 
 interface IForm {
@@ -16,7 +16,7 @@ interface IForm {
 }
 
 export const RegistrationForm = () => {
-  const { user, updateData } = useAuth();
+
   const [formData, setFormData] = useState<IForm>({
     first_name: '',
     last_name: '',
@@ -25,7 +25,7 @@ export const RegistrationForm = () => {
   });
 
   const sendData = async () => {
-    await registration(formData, updateData, user);
+    await registration(formData);
     clearForm();
   };
 
@@ -96,17 +96,7 @@ export const RegistrationForm = () => {
         <Button className={styles.button} onClick={clearForm}>
           CLEAR DATA
         </Button>
-        <Button
-          component={Link as ElementType}
-          href={'/api/auth/signin'}
-          variant='outlined'
-          sx={{
-            width: 190,
-            margin: 'auto'
-          }}
-        >
-          Registration with google
-        </Button>
+        <GoogleButton className={styles.button} text={'Registration with Google'}/>
       </div>
       
     </form>

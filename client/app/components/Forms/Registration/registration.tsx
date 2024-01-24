@@ -1,5 +1,9 @@
 'use server';
-export const registration = async (formData, updateData, user) => {
+
+import { getSession } from 'next-auth/react';
+
+export const registration = async (formData) => {
+  const session = await getSession();
   try {
     const response = await fetch('http://localhost:5000/api/users', {
       method: 'POST',
@@ -13,13 +17,11 @@ export const registration = async (formData, updateData, user) => {
       throw new Error('Network response was not ok');
     }
     const result = await response.json();
-    updateData({
-      ...user,
-      first_name: result.first_name,
-      last_name: result.last_name,
-      email: result.email,
-    });
-    console.log('Data updated successfully:', result);
+    if (response.ok) {
+
+      session.data =response;
+      console.log('Data updated successfully:', result);
+    }
   } catch (error) {
     console.error('Error fetching data:', error);
   }
