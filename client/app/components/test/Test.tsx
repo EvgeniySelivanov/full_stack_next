@@ -1,15 +1,17 @@
 'use client';
 import * as React from 'react';
-import { useAuth, AuthProvider } from '../../AuthContext';
+import { useAuth } from '../../AuthContext';
+import { useSession } from 'next-auth/react';
 export interface IAppProps {}
 
 const Test = (props: IAppProps) => {
+  const session=useSession();
   const { user } = useAuth();
   return (
     <div>
-      <p>Name {user.first_name}</p>
-      <p>Last name {user.last_name}</p>
-      <p>Email {user.email}</p>
+      <p><strong>Status:</strong> {session.status}</p>
+      <p><strong>Name:</strong> {session.data?.user.name}</p>
+      <p><strong>Email</strong> {session.data?.user.email}</p>
     </div>
   );
 };

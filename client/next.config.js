@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
 const nextConfig = {
+  // resolve: {
+  //   alias: {
+  //     '@': path.resolve(__dirname, '/client/'),
+  //   },
+  // },
   async rewrites() {
     return [
       {
