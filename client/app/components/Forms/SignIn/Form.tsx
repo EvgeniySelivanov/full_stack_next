@@ -18,10 +18,7 @@ interface IForm {
 
 const SingInForm = () => {
   const router = useRouter();
-  // const [formData, setFormData] = useState<IForm>({
-  //   email: '',
-  //   password: '',
-  // });
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
 
     event.preventDefault();
@@ -30,8 +27,6 @@ const SingInForm = () => {
     const res = await signIn('credentials', {
       email: formData.get('email'),
       password: formData.get('password'),
-      // email: formData.email,
-      // password: formData.password,
       redirect: false,
     });
     if (res && !res.error) {
@@ -40,24 +35,7 @@ const SingInForm = () => {
       console.log(res);
     }
   };
-  // const sendData = () => {
-  //   handleSubmit(formData);
-  //   clearForm();
-  // };
-  // const clearForm = () => {
-  //   setFormData({
-  //     ...formData,
-  //     email: '',
-  //     password: '',
-  //   });
-  // };
-  // const handleChange = (e) => {
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
+ 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <Typography variant="h5" gutterBottom>

@@ -7,7 +7,6 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER
       },
       firstName: {
@@ -22,7 +21,7 @@ module.exports = {
       },
       email: {
         field: 'email',
-        unique: true,
+        primaryKey: true,
         allowNull: false,
         type: Sequelize.STRING
       },

@@ -14,9 +14,13 @@ export const authConfig: AuthOptions = {
         password: { label: 'password', type: 'password', required: true },
       },
       async authorize(credentials) {
-        console.log('credentials', credentials);
 
-        if (!credentials?.email || !credentials?.password) return null;
+        console.log('credentials>>>>>', credentials);
+        if (!credentials?.email || !credentials?.password){
+
+          console.log('credentials no data>>>>>', credentials);
+          return null;
+        } 
 
         const response = await fetch(
           `http://localhost:5000/api/users/getByEmail`,

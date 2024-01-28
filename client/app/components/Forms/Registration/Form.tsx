@@ -7,7 +7,7 @@ import { InputControl, Label } from '../UI/FormComponents/FormComponents.ts';
 import Button from '../../UI/Button/Button';
 import GoogleButton from '../../GoogleButton';
 import styles from './Form.module.css';
-
+import { useNavigation } from 'next/navigation';
 interface IForm {
   firstName: string;
   lastName: string;
@@ -15,7 +15,7 @@ interface IForm {
   password: string;
 }
 
-export const RegistrationForm = () => {
+const RegistrationForm = () => {
 
   const [formData, setFormData] = useState<IForm>({
     first_name: '',
@@ -24,20 +24,11 @@ export const RegistrationForm = () => {
     password: '',
   });
 
-  const sendData = async () => {
+  const userRegistration = async () => {
     await registration(formData);
-    clearForm();
+    navigation.navigate('/signin');
   };
 
-  const clearForm = () => {
-    setFormData({
-      ...formData,
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: '',
-    });
-  };
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -46,7 +37,7 @@ export const RegistrationForm = () => {
   };
 
   return (
-    <form onSubmit={sendData} className={styles.form}>
+    <form onSubmit={userRegistration} className={styles.form}>
       <Typography variant="h5" gutterBottom>
         Registration
       </Typography>
@@ -88,17 +79,16 @@ export const RegistrationForm = () => {
           onChange={handleChange}
         />
       </FormControl>
-
       <div className={styles.buttonsGroup}>
         <Button className={styles.button} type={'submit'}>
           SEND DATA
         </Button>
-        <Button className={styles.button} onClick={clearForm}>
-          CLEAR DATA
-        </Button>
-        <GoogleButton className={styles.button} text={'Registration with Google'}/>
+        <GoogleButton
+          className={styles.button}
+          text={'Registration with Google'}
+        />
       </div>
-      
     </form>
   );
 };
+export default RegistrationForm;

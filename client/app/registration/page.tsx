@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {RegistrationForm}  from '../components/Forms/Registration/Form';
+import RegistrationForm  from '../components/Forms/Registration/Form';
 
 interface IAppProps {
 }
