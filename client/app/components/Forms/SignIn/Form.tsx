@@ -3,26 +3,17 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import type { FormEventHandler } from 'react';
-
-// import { handleSubmit } from './handleSubmit';
 import { FormControl, Typography, OutlinedInput } from '@mui/material';
 import { InputControl, Label } from '../UI/FormComponents/FormComponents.ts';
 import Button from '../../UI/Button/Button';
 import GoogleButton from '../../GoogleButton';
 import styles from './Form.module.css';
 
-interface IForm {
-  email: string;
-  password: string;
-}
 
 const SingInForm = () => {
   const router = useRouter();
-
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-
     event.preventDefault();
-
     const formData = new FormData(event.currentTarget);
     const res = await signIn('credentials', {
       email: formData.get('email'),
@@ -32,7 +23,7 @@ const SingInForm = () => {
     if (res && !res.error) {
       router.push('/profile');
     } else {
-      console.log(res);
+      console.log(res.error);
     }
   };
  

@@ -1,4 +1,5 @@
 'use server';
+
 export const registration = async (formData) => {
   try {
     const response = await fetch('http://localhost:5000/api/users', {
@@ -13,8 +14,11 @@ export const registration = async (formData) => {
       throw new Error('Network response was not ok');
     }
     const result = await response.json();
-    navigation.navigate('/signin');
+    console.log('result from server>>>>',result);
+    return result;
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+
+  
 };

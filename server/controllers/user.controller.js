@@ -125,7 +125,7 @@ module.exports.getUserByEmail = async (req, res, next) => {
     const {body} = req;
     const user = await User.findOne( {
       where:{email:body.email},
-      attributes: { exclude: ['password'] },
+      // attributes: { exclude: ['password_hash'] },
     });
     if (!user) {
       const error = createError(404, 'User not found');

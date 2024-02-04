@@ -19,8 +19,6 @@ const Header = () => {
         <Link href={'/about'}>About</Link>
         {session?.data && <Link href={'/profile'}>Profile</Link>}
 
-        {/* {session?data && <Link href={"/about"} ></Link>} */}
-
         {session?.data ? (
           <Link href="#" onClick={() => signOut({ callbackUrl: '/' })}>
             Sing Out

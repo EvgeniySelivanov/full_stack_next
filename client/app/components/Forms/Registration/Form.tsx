@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { registration } from './registration';
+import { signIn } from 'next-auth/react';
+import type { FormEventHandler } from 'react';
+import { useRouter } from 'next/navigation';
 import { FormControl, Typography, OutlinedInput } from '@mui/material';
 import { InputControl, Label } from '../UI/FormComponents/FormComponents.ts';
 import Button from '../../UI/Button/Button';
 import GoogleButton from '../../GoogleButton';
 import styles from './Form.module.css';
-import { useNavigation } from 'next/navigation';
 interface IForm {
   firstName: string;
   lastName: string;
@@ -16,17 +18,27 @@ interface IForm {
 }
 
 const RegistrationForm = () => {
-
+  const router = useRouter();
   const [formData, setFormData] = useState<IForm>({
     first_name: '',
     last_name: '',
     email: '',
     password: '',
   });
-
-  const userRegistration = async () => {
-    await registration(formData);
-    navigation.navigate('/signin');
+  const userRegistration: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+    const result = await registration(formData);
+    console.log('result in userRegistration>>>>>>>>>', result);
+    const res = await signIn('credentials', {
+      email: result.data.email,
+      password: formData.password,
+      redirect: false,
+    });
+    if (res && !res.error) {
+      router.push('/profile');
+    } else {
+      console.log('error from credentials',res.error);
+    }
   };
 
   const handleChange = (e) => {
@@ -37,7 +49,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <form onSubmit={userRegistration} className={styles.form}>
+    <form onSubmit={userRegistration} className={styles.form} method="post">
       <Typography variant="h5" gutterBottom>
         Registration
       </Typography>
