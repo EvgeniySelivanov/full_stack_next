@@ -1,8 +1,6 @@
 'use client';
 import Link from 'next/link';
 import { useSession, signIn, signOut } from 'next-auth/react';
-
-
 const Header = () => {
   const session = useSession();
   console.log(session);
@@ -11,14 +9,9 @@ const Header = () => {
     <header>
       <strong>LearnNextJS</strong>
       <nav>
-     
-
-      
         <Link href={'/'}>Main</Link>
-
         <Link href={'/about'}>About</Link>
         {session?.data && <Link href={'/profile'}>Profile</Link>}
-
         {session?.data ? (
           <Link href="#" onClick={() => signOut({ callbackUrl: '/' })}>
             Sing Out

@@ -13,10 +13,10 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Schems from '../../../../utils/validationSchems';
-import { registration } from './registration';
+import { registration } from '../../../api/registration';
 import Button from '../../UI/Button/Button';
 import GoogleButton from '../../GoogleButton';
-import styles from './Form.module.css';
+import styles from '../Form.module.css';
 
 interface IForm {
   firstName: string;

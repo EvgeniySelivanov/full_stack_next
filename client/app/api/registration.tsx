@@ -17,7 +17,5 @@ export const registration = async (formData) => {
     return result;
   } catch (error) {
     console.error('Error fetching data:', error);
-  }
-
-  
+  } 
 };

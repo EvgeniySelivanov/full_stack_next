@@ -16,7 +16,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Schems from '../../../../utils/validationSchems';
 import Button from '../../UI/Button/Button';
 import GoogleButton from '../../GoogleButton';
-import styles from './Form.module.css';
+import styles from '../Form.module.css';
 
 interface IForm {
   firstName: string;
