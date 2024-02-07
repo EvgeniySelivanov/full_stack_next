@@ -5,11 +5,12 @@ import { registration } from './registration';
 import { signIn } from 'next-auth/react';
 import type { FormEventHandler } from 'react';
 import { useRouter } from 'next/navigation';
-import { FormControl, Typography, OutlinedInput } from '@mui/material';
-import { InputControl, Label } from '../UI/FormComponents/FormComponents.ts';
+import { FormControl, Typography, OutlinedInput , FormHelperText} from '@mui/material';
+import classNames from 'classnames';
 import Button from '../../UI/Button/Button';
 import GoogleButton from '../../GoogleButton';
 import styles from './Form.module.css';
+
 interface IForm {
   firstName: string;
   lastName: string;
@@ -25,12 +26,15 @@ const RegistrationForm = () => {
     email: '',
     password: '',
   });
+  const [error, setError] = useState(false);
+
+
   const userRegistration: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     const result = await registration(formData);
-    console.log('result in userRegistration>>>>>>>>>', result);
+   
     const res = await signIn('credentials', {
-      email: result.data.email,
+      email: formData.email,
       password: formData.password,
       redirect: false,
     });
@@ -42,10 +46,17 @@ const RegistrationForm = () => {
   };
 
   const handleChange = (e) => {
+    const newValue = event.target.value;
+    if (newValue.length < 5) {
+      setError(true);
+    } else {
+      setError(false);
+    }
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]:newValue,
     });
+    
   };
 
   return (
@@ -61,7 +72,10 @@ const RegistrationForm = () => {
           value={formData.firstName}
           onChange={handleChange}
           fullWidth
+          sx={{borderColor:'red'}}
+          error={error}
         />
+        {error && <FormHelperText style={{color:'red'}}>More letter...</FormHelperText>}
       </FormControl>
       <FormControl required fullWidth>
         <OutlinedInput
