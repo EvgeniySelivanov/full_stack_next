@@ -1,19 +1,18 @@
 import * as yup from 'yup';
 const validationSchems = {
   LoginSchem: yup.object().shape({
-    email: yup.string().email('check email').required('required'),
+    email: yup.string().email('Check email').required('Email is required'),
     password: yup
-      .string()
-      .test(
-        'test-password',
-        'min 6 symbols',
-        (value) => value && value.trim().length >= 6
-      )
-      .required('required'),
+    .string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters')
+    .matches(/^[a-zA-Z0-9]+$/, 'Password must contain only Latin letters and numbers')
+    .matches(/[A-Z]+/, 'Password must contain at least one uppercase letter')
+    .matches(/[0-9]+/, 'Password must contain at least one digit'),
   }),
 
   RegistrationSchem: yup.object().shape({
-    email: yup.string().email('check email').required('Email is required'),
+    email: yup.string().email('Check email').required('Email is required'),
     password: yup
     .string()
     .required('Password is required')
