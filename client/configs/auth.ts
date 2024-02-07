@@ -18,9 +18,6 @@ export const authConfig: AuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
-        console.log('email in signIn>>>>> ', credentials?.email);
-        console.log('password in signIn>>>>> ', credentials?.password);
-
         const response = await fetch(
           `http://localhost:5000/api/users/getByEmail`,
           {
@@ -34,25 +31,17 @@ export const authConfig: AuthOptions = {
           }
         );
         const { data } = await response?.json();
-        console.log('data in sing in>>>>', data);
-
-        const fullName = await `${data.first_name}  ${data.last_name}`;
-        console.log('fullName>>>>>',fullName);
-        
-        const checkPass = await bcrypt.compare(
+        const fullName:string = await `${data.first_name}  ${data.last_name}`;
+        const checkPass:boolean = await bcrypt.compare(
           credentials?.password,
           data?.password
         );
-          console.log('checkPass',checkPass);
-          
         if (data.email === credentials.email && checkPass) {
           const proof = await {
             name: fullName,
             email: data.email,
             image: data?.image,
           };
-          console.log('proof>>>>>>', proof);
-
           return proof as User;
         }
         return null;
