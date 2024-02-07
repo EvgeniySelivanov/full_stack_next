@@ -48,12 +48,6 @@ const RegistrationForm: React.FC<Props> = () => {
     password: '',
     confirmPassword: '',
   });
-  // const [firstNameError, setFirstNameError] = useState<boolean>(false);
-  // const [lastNameError, setLastNameError] = useState<boolean>(false);
-  // const [emailError, setEmailError] = useState<boolean>(false);
-  // const [passwordError, setPasswordError] = useState<boolean>(false);
-  // const [confirmPasswordError, setConfirmPasswordError] =
-  //   useState<boolean>(false);
 
   const userRegistration: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -85,7 +79,14 @@ const RegistrationForm: React.FC<Props> = () => {
       [name]: value,
     });
     try {
-      Schems.RegistrationSchem.validateSyncAt(name, { [name]: value });
+      if (name === 'confirmPassword') {
+        Schems.RegistrationSchem.validateSyncAt(name, {
+          [name]: value,
+          password: formData.password, // Используйте значение пароля из formData
+        });
+      } else {
+        Schems.RegistrationSchem.validateSyncAt(name, { [name]: value });
+      }
       setErrors((prevErrors) => ({
         ...prevErrors,
         [name]: '',

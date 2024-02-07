@@ -15,17 +15,16 @@ const validationSchems = {
   RegistrationSchem: yup.object().shape({
     email: yup.string().email('check email').required('Email is required'),
     password: yup
-      .string()
-      .test(
-        'test-password',
-        'min 6 symbols',
-        (value) => value && value.trim().length >= 6
-      )
-      .required('required'),
+    .string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters')
+    .matches(/^[a-zA-Z0-9]+$/, 'Password must contain only Latin letters and numbers')
+    .matches(/[A-Z]+/, 'Password must contain at least one uppercase letter')
+    .matches(/[0-9]+/, 'Password must contain at least one digit'),
     confirmPassword: yup
       .string()
       .required('confirm password is required')
-      .oneOf([yup.ref('password')], 'confirmation pass must match password'),
+      .oneOf([yup.ref('password'),null], 'Passwords must match'),
     first_name: yup
       .string()
       .min(2, 'First name must be at least 2 characters long.')
